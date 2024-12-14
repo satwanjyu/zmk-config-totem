@@ -32,6 +32,15 @@
         tapping-term-ms = <150>;
         flavor = "balanced";
 };
+rpi: require_prior_idle {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <150>;
+    quick-tap-ms = <-1>;
+    require-prior-idle-ms = <125>;
+    bindings = <&kp>, <&kp>;
+};
 
 / {
         keymap {
@@ -40,7 +49,7 @@
                 base_layer {
                         bindings = <
            &kp Q       &kp W         &kp F         &kp P         &kp B       &kp J      &kp L        &kp U        &kp Y       &kp SQT           
-           &mt LGUI A  &mt LALT R    &mt LCTRL S   &mt LSHFT T   &kp G       &kp M      &mt RSHFT N  &mt RCTRL E  &mt RALT I  &mt RGUI O        
+           &rpi LGUI A  &rpi LALT R    &rpi LCTRL S   &rpi LSHFT T   &kp G       &kp M      &rpi RSHFT N  &rpi RCTRL E  &rpi RALT I  &rpi RGUI O        
 &kp GRAVE  &kp Z       &kp X         &kp C         &kp D         &kp V       &kp K      &kp H        &kp COMMA    &kp DOT     &kp FSLH   &kp SQT
                        &lt MEDIA ESC &lt NAV SPACE &lt MOUSE TAB                        &lt SYM RET  &lt NUM BSPC &lt FUN DEL
                         >;
