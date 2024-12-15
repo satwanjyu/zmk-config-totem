@@ -35,13 +35,25 @@
 
 / {
         behaviors {
-                rpi: require_prior_idle {
+                l_cmt: custom_mod_tap {
                         compatible = "zmk,behavior-hold-tap";
                         #binding-cells = <2>;
                         flavor = "tap-preferred";
                         tapping-term-ms = <150>;
                         require-prior-idle-ms = <125>;
                         bindings = <&kp>, <&kp>;
+                        hold-trigger-key-positons = <0,1,2,3,4,10,11,12,13,14,20,21,22,23,24,25,32,33,34>;
+                        hold-trigger-on-release = y;
+                };
+                r_cmt: custom_mod_tap {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "tap-preferred";
+                        tapping-term-ms = <150>;
+                        require-prior-idle-ms = <125>;
+                        bindings = <&kp>, <&kp>;
+                        hold-trigger-key-positons = <5,6,7,8,9,15,16,17,18,19,26,27,28,29,30,31,35,36,37>;
+                        hold-trigger-on-release = y;
                 };
         };
         keymap {
@@ -50,8 +62,8 @@
                 base_layer {
                         bindings = <
            &kp Q       &kp W         &kp F         &kp P         &kp B       &kp J      &kp L        &kp U        &kp Y       &kp SQT           
-           &rpi LGUI A  &rpi LALT R    &rpi LCTRL S   &rpi LSHFT T   &kp G       &kp M      &rpi RSHFT N  &rpi RCTRL E  &rpi RALT I  &rpi RGUI O        
-&kp GRAVE  &kp Z       &kp X         &kp C         &kp D         &kp V       &kp K      &kp H        &kp COMMA    &kp DOT     &kp FSLH   &kp SQT
+           &l_cmt LGUI A  &l_cmt LALT R    &l_cmt LCTRL S   &l_cmt LSHFT T   &kp G       &kp M      &r_cmt RSHFT N  &r_cmt RCTRL E  &r_cmt RALT I  &r_cmt RGUI O        
+&kp GRAVE  &kp Z       &kp X         &kp C         &kp D         &kp V       &kp K      &kp H        &kp COMMA    &kp DOT     &kp FSLH      &kp SQT
                        &lt MEDIA ESC &lt NAV SPACE &lt MOUSE TAB                        &lt SYM RET  &lt NUM BSPC &lt FUN DEL
                         >;
                 };
@@ -65,43 +77,43 @@
                 };
                 navigation_layer {
                         bindings = <
-           &none       &none         &none         &none         &none       &none      &none       &none        &none       &none      
-           &kp LGUI    &kp LALT      &kp LCTRL     &kp LSHFT     &none       &caps_word &kp LEFT    &kp DOWN     &kp UP      &kp RIGHT  
-&none      &none       &none         &none         &none         &none       &none      &kp HOME    &kp PG_DN    &kp PG_UP   &kp END    &none
-                                     &none         &none         &none       &none      &none       &none
+           &none       &none         &none         &none         &none       &none      &none        &none        &none       &none      
+           &kp LGUI    &kp LALT      &kp LCTRL     &kp LSHFT     &none       &caps_word &kp LEFT     &kp DOWN     &kp UP      &kp RIGHT  
+&none      &none       &none         &none         &none         &none       &none      &kp HOME     &kp PG_DN    &kp PG_UP   &kp END       &none
+                                     &none         &none         &none       &none      &none        &none
                         >;
                 };
                 // Don't really want to do mouse emulation
                 mouse_layer {
                         bindings = <
-           &none       &none         &none         &none         &none       &none      &none       &none        &none       &none           
-           &kp LGUI    &kp LALT      &kp LCTRL     &kp LSHFT     &none       &none      &none       &none        &none       &none      
-&none      &none       &none         &none         &none         &none       &none      &none       &none        &none       &none      &none
-                                     &none         &none         &none       &none      &none       &none
+           &none       &none         &none         &none         &none       &none      &none        &none        &none       &none           
+           &kp LGUI    &kp LALT      &kp LCTRL     &kp LSHFT     &none       &none      &none        &none        &none       &none      
+&none      &none       &none         &none         &none         &none       &none      &none        &none        &none       &none         &none
+                                     &none         &none         &none       &none      &none        &none
                         >;
                 };
                 symbols_layer {
                         bindings = <
-           &kp LBRC    &kp AMPS      &kp ASTRK     &kp LPAR      &kp RBRC    &none      &none       &none        &none       &none           
-           &kp COLON   &kp DLLR      &kp PRCNT     &kp CARET     &kp PLUS    &none      &kp RSHFT   &kp RCTRL    &kp RALT    &kp RGUI   
-&none      &kp TILDE   &kp EXCL      &kp AT        &kp POUND     &kp PIPE    &none      &none       &none        &none       &none      &none
-                                     &kp LPAR      &kp RPAR      &kp UNDER   &none      &none       &none
+           &kp LBRC    &kp AMPS      &kp ASTRK     &kp LPAR      &kp RBRC    &none      &none        &none        &none       &none           
+           &kp COLON   &kp DLLR      &kp PRCNT     &kp CARET     &kp PLUS    &none      &kp RSHFT    &kp RCTRL    &kp RALT    &kp RGUI   
+&none      &kp TILDE   &kp EXCL      &kp AT        &kp POUND     &kp PIPE    &none      &none        &none        &none       &none         &none
+                                     &kp LPAR      &kp RPAR      &kp UNDER   &none      &none        &none
                         >;
                 };
                 numbers_layer {
                         bindings = <
-           &kp LBKT    &kp N7        &kp N8        &kp N9        &kp RBKT    &none      &none       &none        &none       &none      
-           &kp SEMI    &kp N4        &kp N5        &kp N6        &kp EQUAL   &none      &kp RSHFT   &kp RCTRL    &kp RALT    &kp RGUI   
-&none      &kp GRAVE   &kp N1        &kp N2        &kp N3        &kp BSLH    &none      &none       &none        &none       &none      &none
-                                     &kp DOT       &kp N0        &kp MINUS   &none      &none       &none
+           &kp LBKT    &kp N7        &kp N8        &kp N9        &kp RBKT    &none      &none        &none        &none       &none      
+           &kp SEMI    &kp N4        &kp N5        &kp N6        &kp EQUAL   &none      &kp RSHFT    &kp RCTRL    &kp RALT    &kp RGUI   
+&none      &kp GRAVE   &kp N1        &kp N2        &kp N3        &kp BSLH    &none      &none        &none        &none       &none         &none
+                                     &kp DOT       &kp N0        &kp MINUS   &none      &none        &none
                         >;
                 };
                 function_layer {
                         bindings = <
-           &none       &kp F7      &kp F8        &kp F9        &kp F12       &none      &none       &none        &none       &none           
-           &none       &kp F4      &kp F5        &kp F6        &kp F11       &none      &kp RSHFT   &kp RCTRL    &kp RALT    &kp RGUI        
-&none      &none       &kp F1      &kp F2        &kp F3        &kp F10       &none      &none       &none        &none       &none      &none
-                                     &none         &none         &none       &none      &none       &none
+           &none       &kp F7      &kp F8        &kp F9        &kp F12       &none      &none        &none        &none       &none           
+           &none       &kp F4      &kp F5        &kp F6        &kp F11       &none      &kp RSHFT    &kp RCTRL    &kp RALT    &kp RGUI        
+&none      &none       &kp F1      &kp F2        &kp F3        &kp F10       &none      &none        &none        &none       &none         &none
+                                     &none         &none         &none       &none      &none        &none
                         >;
                 };
         };
