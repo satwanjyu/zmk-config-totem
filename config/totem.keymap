@@ -35,7 +35,7 @@
 
 / {
         behaviors {
-                l_cmt: custom_mod_tap {
+                l_cmt: left_hand_mod_tap {
                         compatible = "zmk,behavior-hold-tap";
                         #binding-cells = <2>;
                         flavor = "tap-preferred";
@@ -45,7 +45,7 @@
                         hold-trigger-key-positons = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 25 32 33 34>;
                         hold-trigger-on-release = "on";
                 };
-                r_cmt: custom_mod_tap {
+                r_cmt: right_hand_mod_tap {
                         compatible = "zmk,behavior-hold-tap";
                         #binding-cells = <2>;
                         flavor = "tap-preferred";
